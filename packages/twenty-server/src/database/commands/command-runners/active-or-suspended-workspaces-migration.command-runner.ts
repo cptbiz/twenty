@@ -72,7 +72,7 @@ export abstract class ActiveOrSuspendedWorkspacesMigrationCommandRunner<
     required: false,
   })
   parseWorkspaceCountLimit(val: string): number {
-    this.workspaceCountLimit = parseInt(val);
+          this.workspaceCountLimit = parseInt(val, 10);
 
     if (isNaN(this.workspaceCountLimit)) {
       throw new Error('Workspace count limit must be a number');

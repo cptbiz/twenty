@@ -90,25 +90,35 @@ export class PgPoolSharedService {
       return;
     }
 
-    this.logPoolConfiguration();
-    this.patchPgPool();
+    try {
+      this.logPoolConfiguration();
+      this.patchPgPool();
 
-    if (!this.isPatchSuccessful()) {
-      this.logger.error(
-        'Failed to patch pg.Pool. PgPoolSharedService will not be active.',
+      if (!this.isPatchSuccessful()) {
+        this.logger.error(
+          'Failed to patch pg.Pool. PgPoolSharedService will not be active.',
+        );
+        this.initialized = false;
+        // Ensure any partially created timers are cleaned up
+        this.stopStatsLogging();
+
+        return;
+      }
+
+      this.initialized = true;
+      this.logger.log(
+        'Pg pool sharing initialized - pools will be shared across tenants',
       );
+
+      if (this.isDebugEnabled) {
+        this.startPoolStatsLogging();
+      }
+    } catch (error) {
+      this.logger.error('Error during pg pool sharing initialization:', error);
       this.initialized = false;
-
-      return;
-    }
-
-    this.initialized = true;
-    this.logger.log(
-      'Pg pool sharing initialized - pools will be shared across tenants',
-    );
-
-    if (this.isDebugEnabled) {
-      this.startPoolStatsLogging();
+      // Defensive cleanup in case of any errors
+      this.stopStatsLogging();
+      throw error;
     }
   }
 
@@ -245,10 +255,19 @@ export class PgPoolSharedService {
    * Starts periodically logging pool statistics if debug is enabled
    */
   private startPoolStatsLogging(): void {
+    // Clear any existing interval to prevent duplicates
+    this.stopStatsLogging();
+
     this.logPoolStats();
 
     this.logStatsInterval = setInterval(() => {
-      this.logPoolStats();
+      try {
+        this.logPoolStats();
+      } catch (error) {
+        this.logger.error('Error during pool stats logging:', error);
+        // Stop logging on error to prevent spam
+        this.stopStatsLogging();
+      }
     }, 30000);
 
     this.logger.debug('Pool statistics logging enabled (30s interval)');

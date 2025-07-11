@@ -77,7 +77,7 @@ export const RelativeDatePickerHeader = (
         value={textInputValue}
         onChange={(text) => {
           const amountString = text.replace(/[^0-9]|^0+/g, '');
-          const amount = parseInt(amountString);
+          const amount = parseInt(amountString, 10);
 
           setAmountString(amountString);
 
