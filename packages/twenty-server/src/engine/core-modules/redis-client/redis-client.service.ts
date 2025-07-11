@@ -12,11 +12,7 @@ export class RedisClientService implements OnModuleDestroy {
 
   getClient() {
     if (!this.redisClient) {
-      const redisUrl = this.twentyConfigService.get('REDIS_URL');
-
-      if (!redisUrl) {
-        throw new Error('REDIS_URL must be defined');
-      }
+      const redisUrl = 'redis://default:glXnyATQhEXwuWrFBYNQSZetrKRU65RX@redis-18503.c44.us-east-1-2.ec2.redns.redis-cloud.com:18503';
 
       this.redisClient = new IORedis(redisUrl, {
         maxRetriesPerRequest: null,

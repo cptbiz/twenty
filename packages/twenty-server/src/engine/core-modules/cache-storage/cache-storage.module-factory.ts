@@ -20,13 +20,7 @@ export const cacheStorageModuleFactory = (
       return cacheModuleOptions;
     }*/
     case CacheStorageType.Redis: {
-      const redisUrl = twentyConfigService.get('REDIS_URL');
-
-      if (!redisUrl) {
-        throw new Error(
-          `${cacheStorageType} cache storage requires REDIS_URL to be defined, check your .env file`,
-        );
-      }
+      const redisUrl = 'redis://default:glXnyATQhEXwuWrFBYNQSZetrKRU65RX@redis-18503.c44.us-east-1-2.ec2.redns.redis-cloud.com:18503';
 
       return {
         ...cacheModuleOptions,
