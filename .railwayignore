@@ -1,0 +1,76 @@
+# Dependencies
+node_modules/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# Development files
+.nx/
+*.log
+.cache/
+.env
+.env.*
+!.env.example
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist/
+build/
+.next/
+out/
+
+# Test files
+coverage/
+.nyc_output/
+test-results/
+
+# Documentation
+*.md
+!README.md
+!RAILWAY_DEPLOYMENT.md
+
+# Git
+.git/
+.gitignore
+
+# CI/CD
+.github/
+.circleci/
+
+# Docker files (we use the Railway-specific ones)
+packages/twenty-docker/
+render.yaml
+
+# Development and testing packages
+packages/twenty-e2e-testing/
+packages/twenty-website/
+packages/twenty-chrome-extension/
+packages/twenty-zapier/
+
+# Storybook
+.storybook/
+storybook-static/
+
+# Linting and formatting
+.eslintcache
+.prettierignore
+.eslintrc.*
+.prettierrc*
+
+# Others
+*.tgz
+*.tar.gz
+.vale.ini
+crowdin.yml
+Makefile
