@@ -1,0 +1,24 @@
+{
+    "name": "ITCBR.IO | Complete AI Solutions",
+    "short_name": "ITCBR.IO",
+    "description": "Your strategic partner on the digital transformation journey. Complete AI solutions for audit, development, and implementation.",
+    "icons": [
+        {
+            "src": "https://raw.githubusercontent.com/itcbr-io/public-assets/main/itcbr-logo.jpeg",
+            "sizes": "192x192",
+            "type": "image/jpeg",
+            "purpose": "maskable"
+        },
+        {
+            "src": "https://raw.githubusercontent.com/itcbr-io/public-assets/main/itcbr-logo.jpeg",
+            "sizes": "512x512",
+            "type": "image/jpeg",
+            "purpose": "any"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#020617",
+    "theme_color": "#0ea5e9",
+    "orientation": "portrait-primary"
+}

@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Title and Description will be set by JavaScript -->
+    <title>ITCBR.IO | Complete AI Solutions: Audit, Development, and Implementation</title>
+    <meta name="description" content="ITCBR.IO is your strategic partner on the digital transformation journey. Discover how Artificial Intelligence can optimize processes and accelerate your revenue growth.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/itcbr-io/public-assets/main/itcbr-logo.jpeg">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/itcbr-io/public-assets/main/itcbr-logo.jpeg">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/itcbr-io/public-assets/main/itcbr-logo.jpeg">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/itcbr-io/public-assets/main/itcbr-logo.jpeg">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#0ea5e9">
+    <meta name="theme-color" content="#0ea5e9">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome (for Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Alpine.js for interactivity -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Chart.js for graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617; /* slate-950 */
+        }
+        .hero-gradient {
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(14, 165, 233, 0.2), rgba(14, 165, 233, 0));
+        }
+        .section-glow {
+            background: radial-gradient(ellipse 100% 60% at 50% 100%, rgba(14, 165, 233, 0.1), rgba(14, 165, 233, 0));
+        }
+        /* Hide scrollbar for mobile menu */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="text-slate-300 antialiased" x-data="{ openMenu: false, langMenu: false }">
+
+    <!-- Header -->
+    <header class="bg-slate-950/80 backdrop-blur-lg fixed w-full z-40">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between h-20 border-b border-slate-800">
+                <a href="#" class="text-2xl font-bold text-white">ITCBR.<span class="text-sky-400">IO</span></a>
+                
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#problema" class="text-sm font-medium text-slate-300 hover:text-sky-400 transition-colors" data-key="navProblem">The Problem</a>
+                    <a href="#metodologia" class="text-sm font-medium text-slate-300 hover:text-sky-400 transition-colors" data-key="navMethodology">Methodology</a>
+                    <a href="#valor" class="text-sm font-medium text-slate-300 hover:text-sky-400 transition-colors" data-key="navValue">How We Create Value</a>
+                    <a href="#cases" class="text-sm font-medium text-slate-300 hover:text-sky-400 transition-colors" data-key="navCases">Cases</a>
+                </nav>
+
+                <div class="flex items-center space-x-4">
+                    <!-- Language Switcher -->
+                    <div x-data="{ langMenu: false }" class="relative hidden lg:block">
+                        <button @click="langMenu = !langMenu" class="flex items-center space-x-2 text-sm font-medium text-slate-300 hover:text-sky-400 transition-colors">
+                            <i class="fas fa-globe"></i>
+                            <span id="current-lang-desktop">EN</span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div x-show="langMenu" @click.away="langMenu = false" x-cloak class="absolute top-full right-0 mt-2 w-32 bg-slate-900 border border-slate-800 rounded-lg shadow-lg">
+                            <a href="#" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-800" onclick="changeLanguage('pt')">Português (PT)</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-800" onclick="changeLanguage('en')">English (EN)</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-800" onclick="changeLanguage('es')">Español (ES)</a>
+                        </div>
+                    </div>
+                    
+                    <a href="#contato" class="hidden sm:inline-block bg-sky-500 text-white font-bold py-2.5 px-6 rounded-lg hover:bg-sky-600 transition-all duration-300" data-key="navAudit">
+                        Schedule Audit
+                    </a>
+                    <button @click="openMenu = true" class="lg:hidden text-white focus:outline-none z-50">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div x-show="openMenu" x-cloak
+         x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+         class="fixed inset-0 bg-slate-950/95 backdrop-blur-lg z-50 flex flex-col items-center justify-center no-scrollbar">
+        
+        <button @click="openMenu = false" class="absolute top-7 right-5 text-white focus:outline-none">
+            <i class="fas fa-times text-3xl"></i>
+        </button>
+
+        <nav class="flex flex-col items-center space-y-8">
+            <a @click="openMenu = false" href="#problema" class="text-2xl font-medium text-slate-300 hover:text-sky-400 transition-colors" data-key="navProblemMobile">The Problem</a>
+            <a @click="openMenu = false" href="#metodologia" class="text-2xl font-medium text-slate-300 hover:text-sky-400 transition-colors" data-key="navMethodologyMobile">Methodology</a>
+            <a @click="openMenu = false" href="#valor" class="text-2xl font-medium text-slate-300 hover:text-sky-400 transition-colors" data-key="navValueMobile">How We Create Value</a>
+            <a @click="openMenu = false" href="#cases" class="text-2xl font-medium text-slate-300 hover:text-sky-400 transition-colors" data-key="navCasesMobile">Cases</a>
+            <a @click="openMenu = false" href="#contato" class="mt-8 bg-sky-500 text-white font-bold py-3 px-10 rounded-lg hover:bg-sky-600 transition-all duration-300" data-key="navAuditMobile">
+                Schedule Audit
+            </a>
+        </nav>
+        
+        <!-- Language Switcher Mobile -->
+        <div class="mt-12">
+            <div class="flex space-x-4">
+                <button onclick="changeLanguage('pt')" class="font-bold text-slate-400 hover:text-sky-400">PT</button>
+                <span class="text-slate-600">|</span>
+                <button onclick="changeLanguage('en')" class="font-bold text-slate-400 hover:text-sky-400">EN</button>
+                <span class="text-slate-600">|</span>
+                <button onclick="changeLanguage('es')" class="font-bold text-slate-400 hover:text-sky-400">ES</button>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <!-- Smart Voice Message Translator Section -->
+        <section id="voice-translator" class="relative pt-40 pb-24 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-900 section-glow">
+            <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
+                <div class="max-w-3xl mx-auto bg-slate-950 p-8 rounded-xl border border-slate-800 shadow-lg">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4" data-key="voiceTranslatorTitle">Smart Voice Message Translator</h2>
+                    <p class="text-lg text-slate-400 mb-8" data-key="voiceTranslatorSubtitle">
+                        Instant voice message translation in 100+ languages directly in WhatsApp. Completely free!
+                    </p>
+                    <a href="#" id="voice-translator-cta" class="inline-block bg-sky-500 text-white font-bold py-3.5 px-8 rounded-lg text-lg hover:bg-sky-600 transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-sky-500/20 mb-6" data-key="voiceTranslatorCta">
+                        Try for Free
+                    </a>
+                    <p class="text-xl font-semibold text-white">
+                        <a href="#" id="voice-translator-number" class="hover:text-sky-400 transition-colors">
+                            📱 +1 (929) 999-4115
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hero Section -->
+        <section class="relative pt-24 pb-24 lg:pt-32 lg:pb-32 overflow-hidden">
+            <div class="hero-gradient absolute inset-0"></div>
+            <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6" data-key="heroTitle">
+                    Is Your Company Operating at Full Potential?
+                </h1>
+                <p class="text-lg lg:text-xl max-w-3xl mx-auto text-slate-400 mb-10" data-key="heroSubtitle">
+                    We use Artificial Intelligence to uncover and eliminate inefficiencies, automate complex processes, and create new revenue streams you didn't even know existed.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#contato" class="w-full sm:w-auto bg-sky-500 text-white font-bold py-3.5 px-8 rounded-lg text-lg hover:bg-sky-600 transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-sky-500/20" data-key="heroCtaPrimary">
+                        Request Free Diagnosis
+                    </a>
+                    <a href="#metodologia" class="w-full sm:w-auto bg-slate-800 text-white font-semibold py-3.5 px-8 rounded-lg hover:bg-slate-700 transition-all duration-300" data-key="heroCtaSecondary">
+                        Understand our Methodology
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Problem Section -->
+        <section id="problema" class="py-16 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white" data-key="problemTitle">Manual processes, lost data, and wasted opportunities.</h2>
+                    <p class="text-lg mt-4 max-w-3xl mx-auto text-slate-400" data-key="problemSubtitle">Your company may be losing money and competitiveness due to problems that AI effectively solves.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="p-6 rounded-lg bg-slate-900 border border-slate-800">
+                        <i class="fas fa-person-running text-2xl text-sky-400 mb-4"></i>
+                        <h3 class="font-semibold text-white mb-2" data-key="problemCard1Title">Operational Inefficiency</h3>
+                        <p class="text-sm text-slate-400" data-key="problemCard1Desc">Repetitive tasks consume your team's valuable time, which could be used for strategic activities.</p>
+                    </div>
+                    <div class="p-6 rounded-lg bg-slate-900 border border-slate-800">
+                        <i class="fas fa-magnifying-glass-chart text-2xl text-sky-400 mb-4"></i>
+                        <h3 class="font-semibold text-white mb-2" data-key="problemCard2Title">Data-less Decisions</h3>
+                        <p class="text-sm text-slate-400" data-key="problemCard2Desc">Important decisions are made based on intuition, not on a deep analysis of available data.</p>
+                    </div>
+                    <div class="p-6 rounded-lg bg-slate-900 border border-slate-800">
+                        <i class="fas fa-dollar-sign text-2xl text-sky-400 mb-4"></i>
+                        <h3 class="font-semibold text-white mb-2" data-key="problemCard3Title">High Costs</h3>
+                        <p class="text-sm text-slate-400" data-key="problemCard3Desc">Unoptimized processes, material waste, and quality failures generate costs that could be avoided.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Methodology Section -->
+        <section id="metodologia" class="py-16 sm:py-24 bg-slate-900 section-glow">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white" data-key="methodologyTitle">Our 3-Step Methodology</h2>
+                    <p class="text-lg mt-4 max-w-2xl mx-auto text-slate-400" data-key="methodologySubtitle">A structured journey to ensure technology delivers maximum value to your business.</p>
+                </div>
+                <div class="space-y-16">
+                    <!-- Step 1 -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <span class="text-5xl font-black text-slate-800">01</span>
+                            <h3 class="text-2xl font-bold text-white mb-4" data-key="methodologyStep1Title">Strategic Audit and Diagnosis</h3>
+                            <p class="text-slate-400 mb-6" data-key="methodologyStep1Desc">This is the discovery phase. It's not just about technology, but about deeply understanding your business.</p>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex items-start"><i class="fas fa-check-circle text-sky-400 mt-1 mr-3"></i><span data-key="methodologyStep1Item1">We map your current processes, data, and systems.</span></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-sky-400 mt-1 mr-3"></i><span data-key="methodologyStep1Item2">We identify the highest leverage points for AI.</span></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-sky-400 mt-1 mr-3"></i><span data-key="methodologyStep1Item3">We deliver an <strong class="text-white" data-key="methodologyStep1Item3Bold">Implementation Roadmap</strong> with projected ROI.</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800/50 p-8 rounded-xl border border-slate-800">
+                            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1974&auto=format&fit=crop" class="rounded-lg" alt="Team in a diagnostic meeting">
+                        </div>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="lg:order-2">
+                            <span class="text-5xl font-black text-slate-800">02</span>
+                            <h3 class="text-2xl font-bold text-white mb-4" data-key="methodologyStep2Title">Solution Development and Modeling</h3>
+                            <p class="text-slate-400 mb-6" data-key="methodologyStep2Desc">With the diagnosis in hand, our team of data scientists and engineers begins to build the solution.</p>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex items-start"><i class="fas fa-check-circle text-sky-400 mt-1 mr-3"></i><span data-key="methodologyStep2Item1">We prepare and treat the data for modeling.</span></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-sky-400 mt-1 mr-3"></i><span data-key="methodologyStep2Item2">We develop and train custom AI algorithms.</span></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-sky-400 mt-1 mr-3"></i><span data-key="methodologyStep2Item3">We create prototypes and conduct tests to validate effectiveness.</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800/50 p-8 rounded-xl border border-slate-800 lg:order-1">
+                            <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=2070&auto=format&fit=crop" class="rounded-lg" alt="Developers working on code">
+                        </div>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <span class="text-5xl font-black text-slate-800">03</span>
+                            <h3 class="text-2xl font-bold text-white mb-4" data-key="methodologyStep3Title">Implementation, Integration, and Support</h3>
+                            <p class="text-slate-400 mb-6" data-key="methodologyStep3Desc">The final phase is where technology becomes a living part of your daily operations.</p>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex items-start"><i class="fas fa-check-circle text-sky-400 mt-1 mr-3"></i><span data-key="methodologyStep3Item1">We integrate the AI solution with your systems (ERP, CRM, etc.).</span></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-sky-400 mt-1 mr-3"></i><span data-key="methodologyStep3Item2">We train your team to use the new tool.</span></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-sky-400 mt-1 mr-3"></i><span data-key="methodologyStep3Item3">We offer ongoing support and optimization to ensure the best results.</span></li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800/50 p-8 rounded-xl border border-slate-800">
+                            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2070&auto=format&fit=crop" class="rounded-lg" alt="Team collaborating on a project">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How AI Creates Value Section -->
+        <section id="valor" class="py-16 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white" data-key="valueTitle">How AI Creates Value for Your Business</h2>
+                    <p class="text-lg mt-4 max-w-3xl mx-auto text-slate-400" data-key="valueSubtitle">Technology is the means. The goal is a direct impact on your financial and operational results.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+                    <!-- Revenue Growth -->
+                    <div class="bg-slate-900 p-8 rounded-xl border border-slate-800">
+                        <h3 class="text-2xl font-bold text-white mb-6" data-key="valueCard1Title">Revenue Growth</h3>
+                        <div class="space-y-5">
+                            <div class="flex items-start"><i class="fas fa-bullhorn text-xl text-sky-400 mr-4 mt-1"></i><div><strong class="text-white" data-key="valueCard1Item1Bold">Personalized Marketing:</strong> <span data-key="valueCard1Item1Desc">Increase conversion with campaigns targeted to the right audience.</span></div></div>
+                            <div class="flex items-start"><i class="fas fa-tags text-xl text-sky-400 mr-4 mt-1"></i><div><strong class="text-white" data-key="valueCard1Item2Bold">Dynamic Pricing:</strong> <span data-key="valueCard1Item2Desc">Optimize prices in real-time based on demand and market behavior.</span></div></div>
+                            <div class="flex items-start"><i class="fas fa-user-plus text-xl text-sky-400 mr-4 mt-1"></i><div><strong class="text-white" data-key="valueCard1Item3Bold">Lead Qualification:</strong> <span data-key="valueCard1Item3Desc">Focus your sales efforts on the leads most likely to close.</span></div></div>
+                        </div>
+                    </div>
+                    <!-- Process Optimization -->
+                    <div class="bg-slate-900 p-8 rounded-xl border border-slate-800">
+                        <h3 class="text-2xl font-bold text-white mb-6" data-key="valueCard2Title">Process Optimization</h3>
+                        <div class="space-y-5">
+                            <div class="flex items-start"><i class="fas fa-gears text-xl text-sky-400 mr-4 mt-1"></i><div><strong class="text-white" data-key="valueCard2Item1Bold">Backoffice Automation:</strong> <span data-key="valueCard2Item1Desc">Reduce costs by automating tasks like invoicing and data entry.</span></div></div>
+                            <div class="flex items-start"><i class="fas fa-truck-fast text-xl text-sky-400 mr-4 mt-1"></i><div><strong class="text-white" data-key="valueCard2Item2Bold">Supply Chain Optimization:</strong> <span data-key="valueCard2Item2Desc">Forecast demand and optimize delivery routes and inventory levels.</span></div></div>
+                            <div class="flex items-start"><i class="fas fa-screwdriver-wrench text-xl text-sky-400 mr-4 mt-1"></i><div><strong class="text-white" data-key="valueCard2Item3Bold">Predictive Maintenance:</strong> <span data-key="valueCard2Item3Desc">Avoid unexpected downtime by predicting equipment failures before they happen.</span></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animated Graph Section -->
+        <section id="resultados-grafico" class="py-16 sm:py-24 bg-slate-900 section-glow">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-white" data-key="graphTitle">Direct Impact on KPIs</h2>
+                        <p class="text-lg text-slate-400 mb-6" data-key="graphDesc">The graph illustrates a real scenario of operational efficiency growth after implementing one of our solutions. The result is a virtuous cycle of continuous improvement.</p>
+                    </div>
+                    <div class="bg-slate-800/50 p-4 sm:p-8 rounded-xl border border-slate-800 h-80">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Case Studies Section -->
+        <section id="cases" class="py-16 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white" data-key="casesTitle">Our Projects in Action</h2>
+                    <p class="text-lg mt-4 max-w-2xl mx-auto text-slate-400" data-key="casesSubtitle">Concrete results for real clients.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Case 1 -->
+                    <div class="bg-slate-900 rounded-lg p-8 border border-slate-800 flex flex-col">
+                        <span class="inline-block bg-sky-900/50 text-sky-300 text-sm font-semibold px-3 py-1 rounded-full mb-4 self-start" data-key="case1Tag">Industry</span>
+                        <h3 class="text-xl font-bold text-white mb-3" data-key="case1Title">Waste Reduction in Production</h3>
+                        <p class="text-slate-400 text-sm mb-6 flex-grow" data-key="case1Desc">We implemented computer vision to identify defects in real-time, reducing material scrap and associated costs.</p>
+                        <div class="mt-auto pt-4 border-t border-slate-800"><strong class="text-2xl text-sky-400">-22%</strong><span class="text-sm text-slate-400" data-key="case1Result"> in waste</span></div>
+                    </div>
+                    <!-- Case 2 -->
+                    <div class="bg-slate-900 rounded-lg p-8 border border-slate-800 flex flex-col">
+                        <span class="inline-block bg-sky-900/50 text-sky-300 text-sm font-semibold px-3 py-1 rounded-full mb-4 self-start" data-key="case2Tag">Logistics</span>
+                        <h3 class="text-xl font-bold text-white mb-3" data-key="case2Title">Delivery Route Optimization</h3>
+                        <p class="text-slate-400 text-sm mb-6 flex-grow" data-key="case2Desc">We developed an algorithm that optimizes routes in real-time, considering traffic, delivery windows, and vehicle capacity.</p>
+                        <div class="mt-auto pt-4 border-t border-slate-800"><strong class="text-2xl text-sky-400">-15%</strong><span class="text-sm text-slate-400" data-key="case2Result"> in fuel cost</span></div>
+                    </div>
+                    <!-- Case 3 -->
+                    <div class="bg-slate-900 rounded-lg p-8 border border-slate-800 flex flex-col">
+                        <span class="inline-block bg-sky-900/50 text-sky-300 text-sm font-semibold px-3 py-1 rounded-full mb-4 self-start" data-key="case3Tag">Finance</span>
+                        <h3 class="text-xl font-bold text-white mb-3" data-key="case3Title">Credit Risk Analysis</h3>
+                        <p class="text-slate-400 text-sm mb-6 flex-grow" data-key="case3Desc">We created a machine learning model that analyzes multiple variables to predict the probability of default with greater accuracy.</p>
+                        <div class="mt-auto pt-4 border-t border-slate-800"><strong class="text-2xl text-sky-400">+98%</strong><span class="text-sm text-slate-400" data-key="case3Result"> accuracy</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contato" class="py-16 sm:py-24 bg-slate-900">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-2xl mx-auto text-center">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white" data-key="contactTitle">Schedule Your Strategic AI Diagnosis</h2>
+                    <p class="text-lg mt-4 text-slate-400" data-key="contactSubtitle">Let's discover the potential of Artificial Intelligence in your business together. The first analysis is free and non-binding.</p>
+                </div>
+                <div class="max-w-xl mx-auto mt-12 bg-slate-950 p-8 rounded-xl border border-slate-800">
+                    <form id="contact-form">
+                        <div class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-slate-300 mb-2" data-key="formName">Full Name</label>
+                                <input type="text" id="name" name="name" class="w-full bg-slate-800 border border-slate-700 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-sky-500 text-white" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-slate-300 mb-2" data-key="formEmail">Work Email</label>
+                                <input type="email" id="email" name="email" class="w-full bg-slate-800 border border-slate-700 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-sky-500 text-white" required>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-slate-300 mb-2" data-key="formChallenge">Your Main Business Challenge</label>
+                                <textarea id="message" name="message" rows="5" class="w-full bg-slate-800 border border-slate-700 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-sky-500 text-white" data-key="formPlaceholder"></textarea>
+                            </div>
+                        </div>
+                        <div class="mt-8">
+                            <button type="submit" class="w-full bg-sky-500 text-white font-bold py-3.5 px-10 rounded-lg hover:bg-sky-600 transition-all duration-300" data-key="formSubmit">
+                                Send via WhatsApp
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800">
+        <div class="container mx-auto px-4 sm:px-6 py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Company Info Column -->
+                <div class="lg:col-span-4">
+                    <h3 class="text-xl font-bold text-white">ITCBR.<span class="text-sky-400">IO</span></h3>
+                    <p class="text-sm mt-2 text-slate-400">ITCBR.IO LTDA<br>CNPJ: 53.821.516/0001-63</p>
+                    <p class="text-sm mt-4 text-slate-400" data-key="footerSlogan">Your strategic partner on the digital transformation journey.</p>
+                </div>
+                <!-- Links & Contact Columns -->
+                <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="font-semibold text-white tracking-wider" data-key="footerLinks">Links</h4>
+                        <ul class="mt-4 space-y-2 text-sm text-slate-400">
+                            <li><a href="#metodologia" class="hover:text-sky-400" data-key="footerLinkMethodology">Methodology</a></li>
+                            <li><a href="#valor" class="hover:text-sky-400" data-key="footerLinkValue">Value Creation</a></li>
+                            <li><a href="#cases" class="hover:text-sky-400" data-key="footerLinkCases">Success Cases</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-white tracking-wider" data-key="footerAddress">Address</h4>
+                        <address class="mt-4 text-sm not-italic text-slate-400">
+                            Avenida Washington Soares, Nº 55, Sala 516<br>
+                            Edson Queiroz - CEP: 60.811-341<br>
+                            Fortaleza, Ceará
+                        </address>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-white tracking-wider" data-key="footerContact">Contact</h4>
+                        <ul class="mt-4 space-y-2 text-sm text-slate-400">
+                            <li><a href="mailto:info@itcbr.io" class="hover:text-sky-400 flex items-start"><i class="fas fa-envelope fa-fw mr-2 mt-1"></i><span>info@itcbr.io</span></a></li>
+                            <li><a href="tel:+5588997889999" class="hover:text-sky-400 flex items-start"><i class="fas fa-phone fa-fw mr-2 mt-1"></i><span>+55 88 99788 9999</span></a></li>
+                        </ul>
+                        <div class="mt-4 flex space-x-4">
+                            <a href="https://www.instagram.com/itcbrio/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-sky-400">
+                                <i class="fa-brands fa-instagram text-xl"></i><span class="sr-only">Instagram</span>
+                            </a>
+                            <a href="https://www.youtube.com/@ITCBR_IO" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-sky-400">
+                                <i class="fa-brands fa-youtube text-xl"></i><span class="sr-only">YouTube</span>
+                            </a>
+                            <a href="https://www.tiktok.com/@itcbrioltda" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-sky-400">
+                                <i class="fa-brands fa-tiktok text-xl"></i><span class="sr-only">TikTok</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-slate-800 pt-8 text-center text-sm text-slate-500">
+                <p data-key="footerCopyright">&copy; 2024 ITCBR.IO. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <div x-data="{ show: false }" @scroll.window="show = (window.scrollY > 600)" x-cloak>
+        <button x-show="show" @click="window.scrollTo({top: 0, behavior: 'smooth'})"
+                x-transition
+                class="fixed bottom-6 right-6 bg-sky-500/80 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-sky-600 focus:outline-none z-30">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <script>
+        // --- TRANSLATION SCRIPT ---
+
+        const translations = {
+            // Meta Tags
+            siteTitle: {
+                pt: 'ITCBR.IO | Soluções Completas de IA: Auditoria, Desenvolvimento e Implementação',
+                en: 'ITCBR.IO | Complete AI Solutions: Audit, Development, and Implementation',
+                es: 'ITCBR.IO | Soluciones Completas de IA: Auditoría, Desarrollo e Implementación'
+            },
+            siteDescription: {
+                pt: 'A ITCBR.IO é sua parceira estratégica na jornada de transformação digital. Descubra como a Inteligência Artificial pode otimizar processos e acelerar o crescimento da sua receita.',
+                en: 'ITCBR.IO is your strategic partner on the digital transformation journey. Discover how Artificial Intelligence can optimize processes and accelerate your revenue growth.',
+                es: 'ITCBR.IO es su socio estratégico en el viaje de transformación digital. Descubra cómo la Inteligencia Artificial puede optimizar procesos y acelerar el crecimiento de sus ingresos.'
+            },
+            // Navigation
+            navProblem: { pt: 'O Problema', en: 'The Problem', es: 'El Problema' },
+            navMethodology: { pt: 'Metodologia', en: 'Methodology', es: 'Metodología' },
+            navValue: { pt: 'Como Geramos Valor', en: 'How We Create Value', es: 'Cómo Generamos Valor' },
+            navCases: { pt: 'Cases', en: 'Cases', es: 'Casos' },
+            navAudit: { pt: 'Agendar Auditoria', en: 'Schedule Audit', es: 'Agendar Auditoría' },
+            navProblemMobile: { pt: 'O Problema', en: 'The Problem', es: 'El Problema' },
+            navMethodologyMobile: { pt: 'Metodologia', en: 'Methodology', es: 'Metodología' },
+            navValueMobile: { pt: 'Como Geramos Valor', en: 'How We Create Value', es: 'Cómo Generamos Valor' },
+            navCasesMobile: { pt: 'Cases', en: 'Cases', es: 'Casos' },
+            navAuditMobile: { pt: 'Agendar Auditoria', en: 'Schedule Audit', es: 'Agendar Auditoría' },
+            // Hero Section
+            heroTitle: {
+                pt: 'Sua Empresa Opera no Máximo Potencial?',
+                en: 'Is Your Company Operating at Full Potential?',
+                es: '¿Su Empresa Opera a su Máximo Potencial?'
+            },
+            heroSubtitle: {
+                pt: 'Nós usamos Inteligência Artificial para descobrir e eliminar ineficiências, automatizar processos complexos e criar novas fontes de receita que você nem sabia que existiam.',
+                en: 'We use Artificial Intelligence to uncover and eliminate inefficiencies, automate complex processes, and create new revenue streams you didn\'t even know existed.',
+                es: 'Utilizamos Inteligencia Artificial para descubrir y eliminar ineficiencias, automatizar procesos complejos y crear nuevas fuentes de ingresos que ni siquiera sabía que existían.'
+            },
+            heroCtaPrimary: {
+                pt: 'Solicitar Diagnóstico Gratuito',
+                en: 'Request Free Diagnosis',
+                es: 'Solicitar Diagnóstico Gratuito'
+            },
+            heroCtaSecondary: {
+                pt: 'Entenda nossa Metodologia',
+                en: 'Understand our Methodology',
+                es: 'Entienda nuestra Metodología'
+            },
+            // Smart Voice Message Translator Section
+            voiceTranslatorTitle: {
+                pt: 'Smart Voice Message Translator',
+                en: 'Smart Voice Message Translator',
+                es: 'Traductor Inteligente de Mensajes de Voz'
+            },
+            voiceTranslatorSubtitle: {
+                pt: 'Tradução instantânea de mensagens de voz em mais de 100 idiomas diretamente no WhatsApp. Completamente gratuito!',
+                en: 'Instant voice message translation in 100+ languages directly in WhatsApp. Completely free!',
+                es: 'Traducción instantánea de mensajes de voz en más de 100 idiomas directamente en WhatsApp. ¡Completamente gratis!'
+            },
+            voiceTranslatorCta: {
+                pt: 'Experimente Grátis',
+                en: 'Try for Free',
+                es: 'Probar Gratis'
+            },
+            voiceTranslatorNumber: {
+                pt: '📱 +1 (929) 999-4115',
+                en: '📱 +1 (929) 999-4115',
+                es: '📱 +1 (929) 999-4115'
+            },
+            voiceTranslatorWhatsappMessage: {
+                pt: 'Olá! Gostaria de saber mais sobre o Smart Voice Message Translator.',
+                en: 'Hello! I would like to know more about the Smart Voice Message Translator.',
+                es: '¡Hola! Me gustaría saber más sobre el Traductor Inteligente de Mensajes de Voz.'
+            },
+            // Problem Section
+            problemTitle: {
+                pt: 'Processos manuais, dados perdidos e oportunidades desperdiçadas.',
+                en: 'Manual processes, lost data, and wasted opportunities.',
+                es: 'Procesos manuales, datos perdidos y oportunidades desperdiciadas.'
+            },
+            problemSubtitle: {
+                pt: 'Sua empresa pode estar perdendo dinheiro e competitividade por problemas que a IA resolve de forma eficaz.',
+                en: 'Your company may be losing money and competitiveness due to problems that AI effectively solves.',
+                es: 'Su empresa puede estar perdiendo dinero y competitividad por problemas que la IA resuelve de manera eficaz.'
+            },
+            problemCard1Title: { pt: 'Ineficiência Operacional', en: 'Operational Inefficiency', es: 'Ineficiencia Operativa' },
+            problemCard1Desc: {
+                pt: 'Tarefas repetitivas consomem tempo valioso da sua equipe, que poderia ser usado em atividades estratégicas.',
+                en: 'Repetitive tasks consume your team\'s valuable time, which could be used for strategic activities.',
+                es: 'Las tareas repetitivas consumen el valioso tiempo de su equipo, que podría dedicarse a actividades estratégicas.'
+            },
+            problemCard2Title: { pt: 'Decisões sem Dados', en: 'Data-less Decisions', es: 'Decisiones sin Datos' },
+            problemCard2Desc: {
+                pt: 'Decisões importantes são tomadas com base na intuição, e não em uma análise profunda dos dados disponíveis.',
+                en: 'Important decisions are made based on intuition, not on a deep analysis of available data.',
+                es: 'Se toman decisiones importantes basadas en la intuición, y no en un análisis profundo de los datos disponibles.'
+            },
+            problemCard3Title: { pt: 'Custos Elevados', en: 'High Costs', es: 'Costos Elevados' },
+            problemCard3Desc: {
+                pt: 'Processos não otimizados, desperdício de material e falhas de qualidade geram custos que poderiam ser evitados.',
+                en: 'Unoptimized processes, material waste, and quality failures generate costs that could be avoided.',
+                es: 'Procesos no optimizados, desperdicio de material y fallas de calidad generan costos que podrían evitarse.'
+            },
+            // Methodology Section
+            methodologyTitle: {
+                pt: 'Nossa Metodologia de 3 Passos',
+                en: 'Our 3-Step Methodology',
+                es: 'Nuestra Metodología de 3 Pasos'
+            },
+            methodologySubtitle: {
+                pt: 'Uma jornada estruturada para garantir que a tecnologia entregue o máximo valor ao seu negócio.',
+                en: 'A structured journey to ensure technology delivers maximum value to your business.',
+                es: 'Un viaje estructurado para garantizar que la tecnología entregue el máximo valor a su negocio.'
+            },
+            methodologyStep1Title: { pt: 'Auditoria e Diagnóstico Estratégico', en: 'Strategic Audit and Diagnosis', es: 'Auditoría y Diagnóstico Estratégico' },
+            methodologyStep1Desc: {
+                pt: 'Esta é a fase de descoberta. Não se trata apenas de tecnologia, mas de entender profundamente seu negócio.',
+                en: 'This is the discovery phase. It\'s not just about technology, but about deeply understanding your business.',
+                es: 'Esta es la fase de descubrimiento. No se trata solo de tecnología, sino de comprender profundamente su negocio.'
+            },
+            methodologyStep1Item1: { pt: 'Mapeamos seus processos, dados e sistemas atuais.', en: 'We map your current processes, data, and systems.', es: 'Mapeamos sus procesos, datos y sistemas actuales.' },
+            methodologyStep1Item2: { pt: 'Identificamos os pontos de maior alavancagem para a IA.', en: 'We identify the highest leverage points for AI.', es: 'Identificamos los puntos de mayor apalancamiento para la IA.' },
+            methodologyStep1Item3: {
+                pt: 'Entregamos um <strong class="text-white">Roadmap de Implementação</strong> com ROI projetado.',
+                en: 'We deliver an <strong class="text-white">Implementation Roadmap</strong> with projected ROI.',
+                es: 'Entregamos un <strong class="text-white">Roadmap de Implementación</strong> con ROI proyectado.'
+            },
+            methodologyStep2Title: { pt: 'Desenvolvimento e Modelagem da Solução', en: 'Solution Development and Modeling', es: 'Desarrollo y Modelado de la Solución' },
+            methodologyStep2Desc: {
+                pt: 'Com o diagnóstico em mãos, nossa equipe de cientistas de dados e engenheiros começa a construir a solução.',
+                en: 'With the diagnosis in hand, our team of data scientists and engineers begins to build the solution.',
+                es: 'Con el diagnóstico en mano, nuestro equipo de científicos de datos e ingenieros comienza a construir la solución.'
+            },
+            methodologyStep2Item1: { pt: 'Preparamos e tratamos os dados para a modelagem.', en: 'We prepare and treat the data for modeling.', es: 'Preparamos y tratamos los datos para el modelado.' },
+            methodologyStep2Item2: { pt: 'Desenvolvemos e treinamos os algoritmos de IA personalizados.', en: 'We develop and train custom AI algorithms.', es: 'Desarrollamos y entrenamos los algoritmos de IA personalizados.' },
+            methodologyStep2Item3: { pt: 'Criamos protótipos e realizamos testes para validar a eficácia.', en: 'We create prototypes and conduct tests to validate effectiveness.', es: 'Creamos prototipos y realizamos pruebas para validar la eficacia.' },
+            methodologyStep3Title: { pt: 'Implementação, Integração e Suporte', en: 'Implementation, Integration, and Support', es: 'Implementación, Integración y Soporte' },
+            methodologyStep3Desc: {
+                pt: 'A fase final é onde a tecnologia se torna parte viva da sua operação diária.',
+                en: 'The final phase is where technology becomes a living part of your daily operations.',
+                es: 'La fase final es donde la tecnología se convierte en una parte viva de su operación diaria.'
+            },
+            methodologyStep3Item1: { pt: 'Integramos a solução de IA aos seus sistemas (ERP, CRM, etc.).', en: 'We integrate the AI solution with your systems (ERP, CRM, etc.).', es: 'Integramos la solución de IA con sus sistemas (ERP, CRM, etc.).' },
+            methodologyStep3Item2: { pt: 'Treinamos sua equipe para utilizar a nova ferramenta.', en: 'We train your team to use the new tool.', es: 'Capacitamos a su equipo para utilizar la nueva herramienta.' },
+            methodologyStep3Item3: { pt: 'Oferecemos suporte e otimização contínua para garantir os melhores resultados.', en: 'We offer ongoing support and optimization to ensure the best results.', es: 'Ofrecemos soporte y otimização continua para garantizar os melhores resultados.' },
+            // Value Section
+            valueTitle: { pt: 'Como a IA Gera Valor para o seu Negócio', en: 'How AI Creates Value for Your Business', es: 'Cómo la IA Genera Valor para su Negocio' },
+            valueSubtitle: {
+                pt: 'A tecnologia é o meio. O objetivo é o impacto direto nos seus resultados financeiros e operacionais.',
+                en: 'Technology is the means. The goal is a direct impact on your financial and operational results.',
+                es: 'La tecnología es el medio. El objetivo es el impacto directo en sus resultados financieros y operativos.'
+            },
+            valueCard1Title: { pt: 'Crescimento de Receita', en: 'Revenue Growth', es: 'Crecimiento de Ingresos' },
+            valueCard1Item1Bold: { pt: 'Marketing Personalizado:', en: 'Personalized Marketing:', es: 'Marketing Personalizado:' },
+            valueCard1Item1Desc: { pt: 'Aumente a conversão com campanhas direcionadas para o público certo.', en: 'Increase conversion with campaigns targeted to the right audience.', es: 'Aumente la conversión con campañas dirigidas al público adecuado.' },
+            valueCard1Item2Bold: { pt: 'Precificação Dinâmica:', en: 'Dynamic Pricing:', es: 'Precios Dinámicos:' },
+            valueCard1Item2Desc: { pt: 'Otimize os preços em tempo real com base na demanda e no comportamento do mercado.', en: 'Optimize prices in real-time based on demand and market behavior.', es: 'Optimice los precios en tiempo real según la demanda y el comportamiento del mercado.' },
+            valueCard1Item3Bold: { pt: 'Qualificação de Leads:', en: 'Lead Qualification:', es: 'Cualificación de Leads:' },
+            valueCard1Item3Desc: { pt: 'Foque seus esforços de venda nos leads com maior probabilidade de fechar negócio.', en: 'Focus your sales efforts on the leads most likely to close.', es: 'Enfoque sus esfuerzos de venta en los leads con mayor probabilidad de cerrar un trato.' },
+            valueCard2Title: { pt: 'Otimização de Processos', en: 'Process Optimization', es: 'Optimización de Procesos' },
+            valueCard2Item1Bold: { pt: 'Automação de Backoffice:', en: 'Backoffice Automation:', es: 'Automatización de Backoffice:' },
+            valueCard2Item1Desc: { pt: 'Reduza custos automatizando tarefas como faturamento e entrada de dados.', en: 'Reduce costs by automating tasks like invoicing and data entry.', es: 'Reduzca costos automatizando tareas como la facturación y la entrada de datos.' },
+            valueCard2Item2Bold: { pt: 'Otimização da Cadeia de Suprimentos:', en: 'Supply Chain Optimization:', es: 'Optimización de la Cadena de Suministro:' },
+            valueCard2Item2Desc: { pt: 'Preveja a demanda e otimize rotas de entrega e níveis de estoque.', en: 'Forecast demand and optimize delivery routes and inventory levels.', es: 'Pronostique la demanda y optimice las rutas de entrega y los niveles de inventario.' },
+            valueCard2Item3Bold: { pt: 'Manutenção Preditiva:', en: 'Predictive Maintenance:', es: 'Mantenimiento Preditivo:' },
+            valueCard2Item3Desc: { pt: 'Evite paradas inesperadas prevendo falhas em equipamentos antes que aconteçam.', en: 'Avoid unexpected downtime by predicting equipment failures before they happen.', es: 'Evite paradas inesperadas prediciendo fallas en los equipos antes de que ocurran.' },
+            // Graph Section
+            graphTitle: { pt: 'Impacto Direto nos KPIs', en: 'Direct Impact on KPIs', es: 'Impacto Directo en los KPIs' },
+            graphDesc: {
+                pt: 'O gráfico ilustra um cenário real de crescimento da eficiência operacional após a implementação de uma de nossas soluções. O resultado é um ciclo virtuoso de melhoria contínua.',
+                en: 'The graph illustrates a real scenario of operational efficiency growth after implementing one of our solutions. The result is a virtuous cycle of continuous improvement.',
+                es: 'El gráfico ilustra un escenario real de crecimiento de la eficiencia operativa tras la implementación de una de nuestras soluciones. El resultado es un ciclo virtuoso de mejora continua.'
+            },
+            graphLabel: { pt: 'Eficiência Operacional (%)', en: 'Operational Efficiency (%)', es: 'Eficiencia Operativa (%)' },
+            graphMonth: { pt: 'Mês', en: 'Month', es: 'Mes' },
+            graphStart: { pt: 'Início', en: 'Start', es: 'Inicio' },
+            // Cases Section
+            casesTitle: { pt: 'Nossos Projetos em Ação', en: 'Our Projects in Action', es: 'Nuestros Proyectos en Acción' },
+            casesSubtitle: { pt: 'Resultados concretos para clientes reais.', en: 'Concrete results for real clients.', es: 'Resultados concretos para clientes reales.' },
+            case1Tag: { pt: 'Indústria', en: 'Industry', es: 'Industria' },
+            case1Title: { pt: 'Redução de Desperdício na Produção', en: 'Waste Reduction in Production', es: 'Reducción de Desperdicios en la Producción' },
+            case1Desc: {
+                pt: 'Implementamos visão computacional para identificar defeitos em tempo real, reduzindo o descarte de material e os custos associados.',
+                en: 'We implemented computer vision to identify defects in real-time, reducing material scrap and associated costs.',
+                es: 'Implementamos visión por computadora para identificar defectos en tiempo real, reduciendo el desecho de material y los costos asociados.'
+            },
+            case1Result: { pt: ' de desperdício', en: ' in waste', es: ' de desperdicio' },
+            case2Tag: { pt: 'Logística', en: 'Logistics', es: 'Logística' },
+            case2Title: { pt: 'Otimização de Rotas de Entrega', en: 'Delivery Route Optimization', es: 'Optimización de Rutas de Entrega' },
+            case2Desc: {
+                pt: 'Desenvolvemos um algoritmo que otimiza as rotas em tempo real, considerando trânsito, janelas de entrega e capacidade dos veículos.',
+                en: 'We developed an algorithm that optimizes routes in real-time, considering traffic, delivery windows, and vehicle capacity.',
+                es: 'Desarrollamos un algoritmo que optimiza las rutas en tiempo real, considerando el tráfico, las ventanas de entrega y la capacidad de los vehículos.'
+            },
+            case2Result: { pt: ' no custo com combustível', en: ' in fuel cost', es: ' en costo de combustible' },
+            case3Tag: { pt: 'Financeiro', en: 'Finance', es: 'Finanzas' },
+            case3Title: { pt: 'Análise de Risco de Crédito', en: 'Credit Risk Analysis', es: 'Análisis de Riesgo Crediticio' },
+            case3Desc: {
+                pt: 'Criamos um modelo de machine learning que analisa múltiplas variáveis para prever a probabilidade de inadimplência com mais precisão.',
+                en: 'We created a machine learning model that analyzes multiple variables to predict the probability of default with greater accuracy.',
+                es: 'Creamos un modelo de machine learning que analiza múltiples variables para predecir la probabilidad de incumplimiento con mayor precisión.'
+            },
+            case3Result: { pt: ' de acurácia', en: ' accuracy', es: ' de precisión' },
+            // Contact Form
+            contactTitle: { pt: 'Agende seu Diagnóstico Estratégico de IA', en: 'Schedule Your Strategic AI Diagnosis', es: 'Agende su Diagnóstico Estratégico de IA' },
+            contactSubtitle: {
+                pt: 'Vamos descobrir juntos o potencial da Inteligência Artificial no seu negócio. A primeira análise é gratuita e sem compromisso.',
+                en: 'Let\'s discover the potential of Artificial Intelligence in your business together. The first analysis is free and non-binding.',
+                es: 'Descubramos juntos el potencial de la Inteligencia Artificial en su negocio. El primer análisis es gratuito y sin compromiso.'
+            },
+            formName: { pt: 'Nome Completo', en: 'Full Name', es: 'Nombre Completo' },
+            formEmail: { pt: 'Email Corporativo', en: 'Work Email', es: 'Email Corporativo' },
+            formChallenge: { pt: 'Principal Desafio do seu Negócio', en: 'Your Main Business Challenge', es: 'Principal Desafío de su Negocio' },
+            formPlaceholder: {
+                pt: "Ex: 'Gostaria de reduzir custos na minha linha de produção...'",
+                en: "E.g., 'I would like to reduce costs on my production line...'",
+                es: "Ej: 'Me gustaría reducir costos en mi línea de producción...'"
+            },
+            formSubmit: { pt: 'Enviar via WhatsApp', en: 'Send via WhatsApp', es: 'Enviar por WhatsApp' },
+            whatsappMessage: {
+                pt: 'Olá! Meu nome é *{name}*.\nEmail: {email}\n\n*Principal Desafio:*\n{message}',
+                en: 'Hello! My name is *{name}*.\nEmail: {email}\n\n*Main Challenge:*\n{message}',
+                es: '¡Hola! Mi nombre es *{name}*.\nEmail: {email}\n\n*Principal Desafío:*\n{message}'
+            },
+            // Footer
+            footerSlogan: { pt: 'Sua parceira estratégica na jornada de transformação digital.', en: 'Your strategic partner on the digital transformation journey.', es: 'Su socio estratégico en el viaje de transformación digital.' },
+            footerLinks: { pt: 'Links', en: 'Links', es: 'Enlaces' },
+            footerLinkMethodology: { pt: 'Metodologia', en: 'Methodology', es: 'Metodología' },
+            footerLinkValue: { pt: 'Geração de Valor', en: 'Value Creation', es: 'Generación de Valor' },
+            footerLinkCases: { pt: 'Cases de Sucesso', en: 'Success Cases', es: 'Casos de Éxito' },
+            footerAddress: { pt: 'Endereço', en: 'Address', es: 'Dirección' },
+            footerContact: { pt: 'Contato', en: 'Contact', es: 'Contacto' },
+            footerCopyright: { pt: '&copy; 2024 ITCBR.IO. Todos os direitos reservados.', en: '&copy; 2024 ITCBR.IO. All rights reserved.', es: '&copy; 2024 ITCBR.IO. Todos los derechos reservados.' },
+        };
+
+        let growthChart; // Define chart variable in a higher scope
+
+        function changeLanguage(lang) {
+            if (!['pt', 'en', 'es'].includes(lang)) {
+                console.error('Unsupported language:', lang);
+                return;
+            }
+
+            // Save preference
+            localStorage.setItem('language', lang);
+
+            // Update all elements with data-key
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[key] && translations[key][lang]) {
+                    // Use innerHTML to support strong tags
+                    element.innerHTML = translations[key][lang];
+                }
+            });
+            
+            // Update form placeholders specifically
+            const messageInput = document.getElementById('message');
+            if (messageInput) {
+                messageInput.placeholder = translations.formPlaceholder[lang];
+            }
+            
+            // Update language switcher display
+            const currentLangDesktop = document.getElementById('current-lang-desktop');
+            if(currentLangDesktop) currentLangDesktop.textContent = lang.toUpperCase();
+
+            // Update html lang attribute
+            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+
+            // Update meta tags
+            document.title = translations.siteTitle[lang];
+            document.querySelector('meta[name="description"]').setAttribute('content', translations.siteDescription[lang]);
+
+            // Re-render chart with translated labels
+            renderGrowthChart(lang);
+        }
+
+        function renderGrowthChart(lang) {
+            const chartCanvas = document.getElementById('growthChart');
+            if (!chartCanvas) return;
+
+            const ctx = chartCanvas.getContext('2d');
+            
+            // Destroy the existing chart instance if it exists
+            if (growthChart) {
+                growthChart.destroy();
+            }
+
+            const chartData = {
+                labels: [
+                    translations.graphStart[lang],  
+                    `${translations.graphMonth[lang]} 2`,  
+                    `${translations.graphMonth[lang]} 4`,
+                    `${translations.graphMonth[lang]} 6`,  
+                    `${translations.graphMonth[lang]} 8`,
+                    `${translations.graphMonth[lang]} 10`,
+                    `${translations.graphMonth[lang]} 12`
+                ],
+                datasets: [{
+                    label: translations.graphLabel[lang],
+                    data: [62, 68, 75, 81, 86, 92, 97],
+                    borderColor: 'rgb(56, 189, 248)',
+                    backgroundColor: 'rgba(56, 189, 248, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                }]
+            };
+
+            const config = {
+                type: 'line',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 50,
+                            max: 100,
+                            ticks: { color: '#94a3b8' }
+                        },
+                        x: {
+                            ticks: { color: '#94a3b8' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.parsed.y}%`;
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 1500, // Add a subtle animation
+                        easing: 'easeInOutQuad'
+                    }
+                }
+            };
+            
+            growthChart = new Chart(ctx, config);
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set initial language to English by default
+            const savedLang = localStorage.getItem('language') || 'en'; // Changed default to 'en'
+            changeLanguage(savedLang);
+
+            // WhatsApp Form Handler
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    const currentLang = localStorage.getItem('language') || 'en'; // Changed default to 'en'
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const message = document.getElementById('message').value;
+                    const whatsappNumber = '5588997889999'; // Your WhatsApp number
+
+                    let whatsappMessageTemplate = translations.whatsappMessage[currentLang];
+                    let whatsappMessage = whatsappMessageTemplate
+                        .replace('{name}', name)
+                        .replace('{email}', email)
+                        .replace('{message}', message);
+
+                    const encodedMessage = encodeURIComponent(whatsappMessage);
+                    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+                    window.open(whatsappUrl, '_blank');
+                });
+            }
+
+            // Smart Voice Message Translator WhatsApp Link
+            const voiceTranslatorCta = document.getElementById('voice-translator-cta');
+            const voiceTranslatorNumberLink = document.getElementById('voice-translator-number');
+            const voiceTranslatorWhatsappNumber = '19299994115'; // The new WhatsApp number
+
+            const createVoiceTranslatorWhatsappLink = () => {
+                const currentLang = localStorage.getItem('language') || 'en'; // Changed default to 'en'
+                const message = translations.voiceTranslatorWhatsappMessage[currentLang];
+                const encodedMessage = encodeURIComponent(message);
+                return `https://wa.me/${voiceTranslatorWhatsappNumber}?text=${encodedMessage}`;
+            };
+
+            if (voiceTranslatorCta) {
+                voiceTranslatorCta.href = createVoiceTranslatorWhatsappLink();
+            }
+            if (voiceTranslatorNumberLink) {
+                voiceTranslatorNumberLink.href = createVoiceTranslatorWhatsappLink();
+            }
+        });
+    </script>
+</body>
+</html>
