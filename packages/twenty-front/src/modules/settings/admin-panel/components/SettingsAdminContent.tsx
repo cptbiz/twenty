@@ -5,7 +5,7 @@ import { SETTINGS_ADMIN_TABS_ID } from '@/settings/admin-panel/constants/Setting
 import { TabList } from '@/ui/layout/tab-list/components/TabList';
 import { t } from '@lingui/core/macro';
 import { useRecoilValue } from 'recoil';
-import { IconHeart, IconSettings2, IconVariable } from 'twenty-ui/display';
+import { IconGitMerge, IconHeart, IconSettings2, IconVariable } from 'twenty-ui/display';
 
 export const SettingsAdminContent = () => {
   const currentUser = useRecoilValue(currentUserState);
@@ -29,6 +29,12 @@ export const SettingsAdminContent = () => {
       id: SETTINGS_ADMIN_TABS.HEALTH_STATUS,
       title: t`Health Status`,
       Icon: IconHeart,
+      disabled: !canAccessFullAdminPanel,
+    },
+    {
+      id: SETTINGS_ADMIN_TABS.GITHUB,
+      title: t`GitHub`,
+      Icon: IconGitMerge,
       disabled: !canAccessFullAdminPanel,
     },
   ];
