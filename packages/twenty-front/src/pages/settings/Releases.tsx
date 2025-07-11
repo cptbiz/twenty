@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Trans, useLingui } from '@lingui/react/macro';
+import DOMPurify from 'dompurify';
 import React, { useEffect, useState } from 'react';
 import rehypeStringify from 'rehype-stringify';
 import remarkParse from 'remark-parse';
@@ -84,24 +85,39 @@ export const Releases = () => {
   const [releases, setReleases] = useState<ReleaseNote[]>([]);
 
   useEffect(() => {
-    fetch('https://twenty.com/api/releases').then(async (res) => {
-      const json = await res.json();
-      for (const release of json) {
-        release.html = String(
-          await unified()
-            .use([remarkParse, remarkRehype, rehypeStringify] as PluggableList)
-            .use(() => (tree: any) => {
-              visit(tree, (node) => {
-                if (node.tagName === 'h1' || node.tagName === 'h2') {
-                  node.tagName = 'h3';
-                }
-              });
-            })
-            .process(release.content),
-        );
-      }
-      setReleases(json);
-    });
+    fetch('https://twenty.com/api/releases')
+      .then(async (res) => {
+        if (!res.ok) {
+          throw new Error(`Failed to fetch releases: ${res.status}`);
+        }
+        const json = await res.json();
+        for (const release of json) {
+          const processedHtml = String(
+            await unified()
+              .use([remarkParse, remarkRehype, rehypeStringify] as PluggableList)
+              .use(() => (tree: any) => {
+                visit(tree, (node) => {
+                  if (node.tagName === 'h1' || node.tagName === 'h2') {
+                    node.tagName = 'h3';
+                  }
+                });
+              })
+              .process(release.content),
+          );
+          // Sanitize HTML to prevent XSS attacks
+          release.html = DOMPurify.sanitize(processedHtml, {
+            ALLOWED_TAGS: ['h3', 'p', 'code', 'pre', 'ul', 'ol', 'li', 'strong', 'em', 'a', 'img'],
+            ALLOWED_ATTR: ['href', 'src', 'alt', 'title'],
+            ALLOW_DATA_ATTR: false,
+          });
+        }
+        setReleases(json);
+      })
+      .catch((error) => {
+        console.error('Failed to load release notes:', error);
+        // Set empty releases array on error to prevent UI crash
+        setReleases([]);
+      });
   }, []);
 
   return (

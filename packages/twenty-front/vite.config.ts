@@ -28,7 +28,7 @@ export default defineConfig(({ command, mode }) => {
   } = env;
 
   const port = isNonEmptyString(REACT_APP_PORT)
-    ? parseInt(REACT_APP_PORT)
+    ? parseInt(REACT_APP_PORT, 10)
     : 3001;
 
   const isBuildCommand = command === 'build';
