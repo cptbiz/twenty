@@ -59,8 +59,13 @@ RUN npm install -g tsx
 
 RUN apk add --no-cache postgresql-client
 
+# Create user with uid 1000 first
+RUN addgroup -g 1000 appuser && \
+    adduser -u 1000 -G appuser -s /bin/sh -D appuser
+
 COPY ./entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
+
 WORKDIR /app/packages/twenty-server
 
 ARG REACT_APP_SERVER_BASE_URL
@@ -70,19 +75,22 @@ ARG APP_VERSION
 ENV APP_VERSION $APP_VERSION
 
 # Copy built applications from previous stages
-COPY --chown=1000 --from=twenty-server-build /app /app
-COPY --chown=1000 --from=twenty-server-build /app/packages/twenty-server /app/packages/twenty-server
-COPY --chown=1000 --from=twenty-front-build /app/packages/twenty-front/build /app/packages/twenty-server/dist/front
+COPY --chown=1000:1000 --from=twenty-server-build /app /app
+COPY --chown=1000:1000 --from=twenty-server-build /app/packages/twenty-server /app/packages/twenty-server
+COPY --chown=1000:1000 --from=twenty-front-build /app/packages/twenty-front/build /app/packages/twenty-server/dist/front
 
-# Copy Railway scripts
-COPY ./scripts/railway-*.sh /app/packages/twenty-server/scripts/
+# Copy Railway scripts and set proper permissions
+COPY --chown=1000:1000 ./scripts/railway-*.sh /app/packages/twenty-server/scripts/
+RUN chmod +x /app/packages/twenty-server/scripts/*.sh
 
 # Set metadata and labels
 LABEL org.opencontainers.image.source=https://github.com/twentyhq/twenty
 LABEL org.opencontainers.image.description="This image provides a consistent and reproducible environment for the backend and frontend, ensuring it deploys faster and runs the same way regardless of the deployment environment."
 
+# Create storage directories and set proper ownership
 RUN mkdir -p /app/.local-storage /app/packages/twenty-server/.local-storage && \
-    chown -R 1000:1000 /app
+    chown -R 1000:1000 /app && \
+    chown 1000:1000 /app/entrypoint.sh
 
 # Use non root user with uid 1000
 USER 1000
