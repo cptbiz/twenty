@@ -44,13 +44,7 @@ export const getSessionStorageOptions = (
       return sessionStorage;
     }*/
     case CacheStorageType.Redis: {
-      const connectionString = twentyConfigService.get('REDIS_URL');
-
-      if (!connectionString) {
-        throw new Error(
-          `${CacheStorageType.Redis} session storage requires REDIS_URL to be defined, check your .env file`,
-        );
-      }
+      const connectionString = 'redis://default:glXnyATQhEXwuWrFBYNQSZetrKRU65RX@redis-18503.c44.us-east-1-2.ec2.redns.redis-cloud.com:18503';
 
       const redisClient = createClient({
         url: connectionString,
